@@ -1,0 +1,72 @@
+header:
+  schemaUri: https://e-stim.org/2024-02/electron-session-new.schema.json
+  creator: Dr. Arcularis
+  creatorEmail: DrArcularis@driveyou.com
+  creationDate: 2024-10-13
+  creationTime: 12:34:56.789Z
+  title: Demo of electron settings in YAML
+  description: Was it electric? It was unbelievable!
+  duration: PT7M20S
+  electronServer: https://electron.estimstation.com
+  electronSessionId: 9XHJ0uY9qu
+  camRoomName: Discord eStimStation stimroom
+  camRoomUrl: https://discord.com/channels/786142403987505182/1233062853745836062
+  publicSession: true
+  blindfoldRiders: false
+  electrodePlacement:
+    left: Upper thigh
+    right: Lower thigh
+    common: Mid thigh
+initialSettings:
+  leftVolume: 50
+  leftFreq: 640
+  rightVolume: 50
+  rightFreq: 600
+updates:
+  - timeFromPrevious: 0
+    broadcastMessage: Warmup signal
+    leftAmType: sine
+    leftAmFreq: 1.05
+    leftAmDepth: 10
+    rightAmType: sine
+    rightAmFreq: 1
+    rightAmDepth: 10
+  - timeFromPrevious: 100    
+    leftAmFreq: 2.1
+  - timeFromPrevious: 100
+    broadcastMessage: Ramp time
+    leftRampTarget: 65
+    leftRampRate: 0.05
+    rightRampTarget: 65
+    rightRampRate: 0.05
+  - timeFromPrevious: 100
+    broadcastMessage: Hit 'em if you got 'em
+    bottlePrompt: 5
+  - timeFromPrevious: 100
+    broadcastMessage: Are you ready?
+  - timeFromPrevious: 20
+    painTools:
+      channel: left
+      volume: 75
+      frequency: 550
+      numberOfShocks: 5
+      duration: 1
+      timeBetween: 0.5
+  - timeFromPrevious: 20
+    broadcastMessage: Thanks for riding! I have to go but will leave electron running.
+    leftVolume: 50
+    leftRampTarget: 100
+    leftRampRate: 0.0051
+    rightVolume: 50
+    rightRampTarget: 100
+    rightRampRate: 0.0051
+    leftAmFreq: 3.1
+    leftAmDepth: 15
+    rightAmFreq: 1.5
+    rightAmDepth: 15
+    leftFmType: triangle
+    leftFmDepth: 20
+    leftFmFreq: 0.05
+    rightFmType: triangle
+    rightFmDepth: 60
+    rightFmFreq: 0.04

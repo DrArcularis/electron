@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://e-stim.org/2024-09/electron-session-current.schema.json",
+  "$ref": "#/$defs/electronSession",
+  "$defs": {
+    "electronSession": {
+      "title": "Electron Session",
+      "description": "Electron Session File",
+      "type": "object",
+      "properties": {
+        "left": {
+          "$ref": "#/$defs/channelSequence"
+        },
+        "right": {
+          "$ref": "#/$defs/channelSequence"
+        }
+      },
+      "additionalProperties": false
+    },
+    "channelSequence": {
+      "description": "Electron Channel Sequence",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/timestampedSettings"
+      },
+      "minItems": 1
+    },
+    "timestampedSettings": {
+      "description": "Electron Timestamped Settings",
+      "type": "object",
+      "properties": {
+        "stamp": {
+          "type": "integer"
+        },
+        "message": {
+          "$ref": "#/$defs/channelSettings"
+        },
+        "additionalProperties": false,
+        "required": [
+          "stamp",
+          "message"
+        ]
+      }
+    },
+    "channelSettings": {
+      "description": "Electron Settings",
+      "type": "object",
+      "properties": {
+        "active": {
+          "description": "Is channel active",
+          "type": "boolean"
+        },
+        "volume": {
+          "description": "How intense the signal is, from 0% to 100%.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "freq": {
+          "description": "The number of times per second the wave oscillates. Higher values usually feel smoother and lower values feel harsher.",
+          "type": "number",
+          "minimum": 100,
+          "maximum": 3000
+        },
+        "amType": {
+          "description": "The type of waveform to use for amplitude (volume) modulation.",
+          "$ref": "#/$defs/modTypes"
+        },
+        "amDepth": {
+          "description": "How many percentage points the amplitude (volume) will be altered by in each cycle. For example, if your current volume is 75% and you set the A.M. Depth to 5% the volume will oscillate between 70% and 80%.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "amFreq": {
+          "description": "How many times per second the amplitude (volume) modulation will be performed.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "fmType": {
+          "description": "The type of waveform to use for frequency modulation.",
+          "$ref": "#/$defs/modTypes"
+        },
+        "fmDepth": {
+          "description": "How many hertz the frequency will be altered by in each cycle. For example, if your current frequency is 2000 Hz and you set the F.M. Depth to 50 Hz the frequency will oscillate between 1950 and 2050 Hz.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "fmFreq": {
+          "description": "How many times per second the frequency modulation will be performed.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "rampTarget": {
+          "description": "The volume will automatically change until this value is reached.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "rampRate": {
+          "description": "The number of percentage points per second the volume will actually change. For example if you set target volume at 60% and change rate to 1% / sec when the current volume is 50%, the ramp will take 10 seconds to complete.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "active",
+        "volume",
+        "freq",
+        "amType",
+        "amDepth",
+        "amFreq",
+        "fmType",
+        "fmDepth",
+        "fmFreq",
+        "rampTarget",
+        "rampRate"
+      ]
+    },
+    "modTypes": {
+      "enum": [
+        "none",
+        "sine",
+        "sawtooth",
+        "square",
+        "triangle"
+      ]
+    }
+  }
+}

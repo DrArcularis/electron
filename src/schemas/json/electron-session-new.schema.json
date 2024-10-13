@@ -1,0 +1,361 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://e-stim.org/2024-09/electron-session-new.schema.json",
+  "$ref": "#/$defs/electronSession",
+  "$defs": {
+    "electronSession": {
+      "title": "Electron Session",
+      "description": "Electron Session File",
+      "type": "object",
+      "properties": {
+        "header": {
+          "$ref": "#/$defs/electronSessionHeader"
+        },
+        "initialSettings": {
+          "$ref": "#/$defs/initialSettings"
+        },
+        "updates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/updates"
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "header",
+        "initialSettings"
+      ]
+    },
+    "electronSessionHeader": {
+      "description": "Electron Session Metadata",
+      "type": "object",
+      "properties": {
+        "schemaUri": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "creatorEmail": {
+          "type": "string",
+          "format": "email"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "time"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "duration": {
+          "description": "The session duration as an ISO 8601 string",
+          "type": "string",
+          "format": "duration"
+        },
+        "electronServer": {
+          "description": "The server where the session was originally driven, if applicable",
+          "format": "uri-reference"
+        },
+        "electronSessionId": {
+          "description": "The session ID when the session was originally driven, if applicable",
+          "format": "string"
+        },
+        "camRoomName": {
+          "description": "Name of cam room used by original session driver and rider(s)",
+          "format": "string"
+        },
+        "camRoomUrl": {
+          "description": "URL of cam room used by original session driver and rider(s)",
+          "format": "uri-reference"
+        },
+        "publicSession": {
+          "description": "Was the original session public?",
+          "format": "boolean"
+        },
+        "blindfoldRiders": {
+          "description": "Did the original session hide controls from riders?",
+          "format": "boolean"
+        },
+        "electrodePlacement": {
+          "$ref": "#/$defs/electrodePlacement"
+        }
+      },
+      "additionalProperties": true,
+      "required": [
+        "schemaUri"
+      ]
+    },
+    "electrodePlacement": {
+      "description": "Suggested placement of electrodes",
+      "type": "object",
+      "properties": {
+        "left": {
+          "type": "string"
+        },
+        "right": {
+          "type": "string"
+        },
+        "common": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": "false"
+    },
+    "initialSettings": {
+      "description": "Initial settings. Both channels start active and all other parameters are 0 (modulation types set to none).",
+      "type": "object",
+      "properties": {
+        "leftVolume": {
+          "description": "How intense the left channel signal is, from 0% to 100%.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "leftFreq": {
+          "description": "The number of times per second the left channel wave oscillates. Higher values usually feel smoother and lower values feel harsher.",
+          "type": "number",
+          "minimum": 100,
+          "maximum": 3000
+        },
+        "rightVolume": {
+          "description": "How intense the left channel signal is, from 0% to 100%.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "rightFreq": {
+          "description": "The number of times per second the left channel wave oscillates. Higher values usually feel smoother and lower values feel harsher.",
+          "type": "number",
+          "minimum": 100,
+          "maximum": 3000
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "leftVolume",
+        "leftFreq",
+        "rightVolume",
+        "rightFreq"
+      ]
+    },
+    "updates": {
+      "description": "Updates to settings",
+      "type": "object",
+      "properties": {
+        "timeFromPrevious": {
+          "description": "Time from previous update in seconds",
+          "type": "number",
+          "minimum": 0
+        },
+        "broadcastMessage": {
+          "description": "Message to display to riders",
+          "type": "string"
+        },
+        "bottlePrompt": {
+          "description": "Display a bottle prompt for the specified number of seconds",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "leftActive": {
+          "description": "Set the left channel active or inactive.",
+          "type": "boolean"
+        },
+        "leftVolume": {
+          "description": "How intense the left channel signal is, from 0% to 100%.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "leftFreq": {
+          "description": "The number of times per second the left channel wave oscillates. Higher values usually feel smoother and lower values feel harsher.",
+          "type": "number",
+          "minimum": 100,
+          "maximum": 3000
+        },
+        "leftRampTarget": {
+          "description": "The left volume will automatically change until this value is reached.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "leftRampRate": {
+          "description": "The number of percentage points per second the left volume will actually change. For example if you set target volume at 60% and change rate to 1% / sec when the current volume is 50%, the ramp will take 10 seconds to complete.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "leftAmType": {
+          "description": "The type of waveform to use for left amplitude (volume) modulation.",
+          "$ref": "#/$defs/modTypes"
+        },
+        "leftAmDepth": {
+          "description": "How many percentage points the left amplitude (volume) will be altered by in each cycle. For example, if your current volume is 75% and you set the A.M. Depth to 5% the volume will oscillate between 70% and 80%.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "leftAmFreq": {
+          "description": "How many times per second the left amplitude (volume) modulation will be performed.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "leftFmType": {
+          "description": "The type of waveform to use for left frequency modulation.",
+          "$ref": "#/$defs/modTypes"
+        },
+        "leftFmDepth": {
+          "description": "How many hertz the left frequency will be altered by in each cycle. For example, if your current frequency is 2000 Hz and you set the F.M. Depth to 50 Hz the frequency will oscillate between 1950 and 2050 Hz.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "leftFmFreq": {
+          "description": "How many times per second the left frequency modulation will be performed.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "rightActive": {
+          "description": "Set the right channel active or inactive.",
+          "type": "boolean"
+        },
+        "rightVolume": {
+          "description": "How intense the left channel signal is, from 0% to 100%.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "rightFreq": {
+          "description": "The number of times per second the left channel wave oscillates. Higher values usually feel smoother and lower values feel harsher.",
+          "type": "number",
+          "minimum": 100,
+          "maximum": 3000
+        },
+        "rightRampTarget": {
+          "description": "The right volume will automatically change until this value is reached.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "rightRampRate": {
+          "description": "The number of percentage points per second the right volume will actually change. For example if you set target volume at 60% and change rate to 1% / sec when the current volume is 50%, the ramp will take 10 seconds to complete.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "rightAmType": {
+          "description": "The type of waveform to use for right amplitude (volume) modulation.",
+          "$ref": "#/$defs/modTypes"
+        },
+        "rightAmDepth": {
+          "description": "How many percentage points the right amplitude (volume) will be altered by in each cycle. For example, if your current volume is 75% and you set the A.M. Depth to 5% the volume will oscillate between 70% and 80%.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "rightAmFreq": {
+          "description": "How many times per second the right amplitude (volume) modulation will be performed.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "rightFmType": {
+          "description": "The type of waveform to use for right frequency modulation.",
+          "$ref": "#/$defs/modTypes"
+        },
+        "rightFmDepth": {
+          "description": "How many hertz the right frequency will be altered by in each cycle. For example, if your current frequency is 2000 Hz and you set the F.M. Depth to 50 Hz the frequency will oscillate between 1950 and 2050 Hz.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "rightFmFreq": {
+          "description": "How many times per second the frequency modulation will be performed.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "painTools": {
+          "$ref": "#/$defs/painTools"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "timeFromPrevious"
+      ]
+    },
+    "modTypes": {
+      "enum": [
+        "none",
+        "sine",
+        "sawtooth",
+        "square",
+        "triangle"
+      ]
+    },
+    "painTools": {
+      "description": "Please use this tool responsibly! The Pain Tool allows you to interrupt the signal that is currently being played on this channel temporarily, in order to administer sharp shocks. After completing the specified number of shocks, the signal that was playing previously will automatically resume.",
+      "type": "object",
+      "properties": {
+        "channel": {
+          "description": "Which channel to administer shocks",
+          "enum": [
+            "left",
+            "right"
+          ]
+        },
+        "volume": {
+          "description": "Shock volume",
+          "format": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "frequency": {
+          "description": "Shock frequency",
+          "format": "number",
+          "minimum": 100,
+          "maximum": 3000
+        },
+        "numberOfShocks": {
+          "description": "Number of shocks",
+          "format": "number",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "duration": {
+          "description": "Duration of each individual shock",
+          "format": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "timeBetween": {
+          "description": "Time between shocks",
+          "format": "number",
+          "minimum": 0,
+          "maximum": 10
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "channel",
+        "volume",
+        "frequency",
+        "numberOfShocks",
+        "duration",
+        "timeBetween"
+      ]
+    }
+  }
+}
