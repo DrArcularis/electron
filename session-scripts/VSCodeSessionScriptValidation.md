@@ -1,0 +1,7 @@
+The schema files electron-session-current.schema.json and electron-session-new.schema.json in the src/schemas/json/ directory can be used to validate electron session scripts in the current JSON format or in the proposed new YAML format. The schema validation files are written using JSON Schema JSON files for both formats, including the proposed new YAML format.
+
+"Validate" means to check that a session script contain all of the necessary fields and that field values are within bounds, so that a session script can be ingested by the electron application. This level of validation will not find all possible errors in the session scripts, but it is a good start.
+
+If you would like to write session scripts by hand with a text editor, VSCode is an excellent choice for a text editor. VSCode can be configured to use these schema files to check their contents as you type. It can also provide auto-completion hints as you type.
+
+TODO: Currently if you download the electron repo including .vscode/settings.json and the schemas in src/schemas/json, VSCode JSON Schema validation will work. However, I would like have instructions if you don't download the electron repo and just have access to the JSON Schema files.

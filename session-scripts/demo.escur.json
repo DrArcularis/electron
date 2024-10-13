@@ -1,0 +1,62 @@
+{
+    "meta": {
+        "driverName": "L4FD",
+        "driverComments": "For SS"
+    },
+    "left": [
+        {
+            "stamp": 11829,
+            "message": {
+                "active": true,
+                "volume": 50,
+                "freq": 650,
+                "amType": "none",
+                "amDepth": 10,
+                "amFreq": 0,
+                "fmType": "none",
+                "fmDepth": 10,
+                "fmFreq": 0,
+                "rampTarget": 50,
+                "rampRate": 0
+            }
+        }
+    ],
+    "right": [
+        {
+            "stamp": 10981,
+            "message": {
+                "active": true,
+                "volume": 50,
+                "freq": 550,
+                "amType": "none",
+                "amDepth": 10,
+                "amFreq": 0,
+                "fmType": "none",
+                "fmDepth": 10,
+                "fmFreq": 0,
+                "rampTarget": 50,
+                "rampRate": 0
+            }
+        }
+    ],
+    "pain-left": [
+        {
+            "stamp": 61487,
+            "message": {
+                "volume": 0.6,
+                "frequency": 1600,
+                "shockDuration": 0.05,
+                "timeBetweenShocks": 0.3,
+                "numberOfShocks": 5
+            }
+        }
+    ],
+    "bottle": [
+        {
+            "stamp": 56845,
+            "message": {
+                "bottleDuration": 5
+            }
+        }
+    ]
+}

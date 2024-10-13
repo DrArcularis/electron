@@ -1,0 +1,13 @@
+{
+    "yaml.schemas": {
+        ".\\src\\schemas\\json\\electron-session-new.schema.json": "*.esnew.yaml",
+    },
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "**/*.escur.json"
+            ],
+            "url": "./src/schemas/json/electron-session-current.schema.json"
+        }
+    ]
+}

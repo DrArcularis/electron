@@ -31,7 +31,7 @@ updates:
     rightAmType: sine
     rightAmFreq: 1
     rightAmDepth: 10
-  - timeFromPrevious: 100    
+  - timeFromPrevious: 100
     leftAmFreq: 2.1
   - timeFromPrevious: 100
     broadcastMessage: Ramp time

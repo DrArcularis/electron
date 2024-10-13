@@ -8,32 +8,73 @@
       "description": "Electron Session File",
       "type": "object",
       "properties": {
+        "meta": {
+          "$ref": "#/$defs/metadata"
+        },
         "left": {
-          "$ref": "#/$defs/channelSequence"
+          "description": "Left channel settings",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/timestampedSettings"
+          },
+          "minItems": 1
         },
         "right": {
-          "$ref": "#/$defs/channelSequence"
+          "description": "Right channel settings",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/timestampedSettings"
+          },
+          "minItems": 1
+        },
+        "pain-left": {
+          "description": "Left channel pain tools",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/timestampedPainTools"
+          }
+        },
+        "pain-right": {
+          "description": "Right channel pain tools",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/timestampedPainTools"
+          }
+        },
+        "bottle": {
+          "description": "Bottle prompts",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/timestampedBottlePrompts"
+          }
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "meta"
+      ]
     },
-    "channelSequence": {
-      "description": "Electron Channel Sequence",
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/timestampedSettings"
-      },
-      "minItems": 1
+    "metadata": {
+      "description": "Session metadata",
+      "type": "object",
+      "properties": {
+        "driverName": {
+          "type": "string"
+        },
+        "driverComments": {
+          "type": "string"
+        }
+      }
     },
     "timestampedSettings": {
-      "description": "Electron Timestamped Settings",
+      "description": "Timestamped Settings",
       "type": "object",
       "properties": {
         "stamp": {
           "type": "integer"
         },
         "message": {
-          "$ref": "#/$defs/channelSettings"
+          "$ref": "#/$defs/settings"
         },
         "additionalProperties": false,
         "required": [
@@ -42,7 +83,7 @@
         ]
       }
     },
-    "channelSettings": {
+    "settings": {
       "description": "Electron Settings",
       "type": "object",
       "properties": {
@@ -129,6 +170,92 @@
         "sawtooth",
         "square",
         "triangle"
+      ]
+    },
+    "timestampedPainTools": {
+      "description": "Timestamped Pain Tools",
+      "type": "object",
+      "properties": {
+        "stamp": {
+          "type": "integer"
+        },
+        "message": {
+          "$ref": "#/$defs/painTools"
+        },
+        "additionalProperties": false,
+        "required": [
+          "stamp",
+          "message"
+        ]
+      }
+    },
+    "painTools": {
+      "type": "object",
+      "properties": {
+        "volume": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "frequency": {
+          "type": "number",
+          "minimum": 100,
+          "maximum": 3000
+        },
+        "shockDuration": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "timeBetweenShocks": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "numberOfShocks": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "volume",
+        "frequency",
+        "shockDuration",
+        "timeBetweenShocks",
+        "numberOfShocks"
+      ]
+    },
+    "timestampedBottlePrompts": {
+      "description": "Timestamped Bottle Prompts",
+      "type": "object",
+      "properties": {
+        "stamp": {
+          "type": "integer"
+        },
+        "message": {
+          "$ref": "#/$defs/bottlePrompts"
+        },
+        "additionalProperties": false,
+        "required": [
+          "stamp",
+          "message"
+        ]
+      }
+    },
+    "bottlePrompts": {
+      "type": "object",
+      "properties": {
+        "bottleDuration": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "bottleDuration"
       ]
     }
   }
